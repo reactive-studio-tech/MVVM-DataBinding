@@ -5,6 +5,7 @@
 
     <data>
         <variable name="movie" type="com.reactivestudio.viewmodelbinding.data.model.Movie"/>
+        <variable name="listener" type="com.reactivestudio.viewmodelbinding.movies.MovieItemClickListener"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -17,7 +18,8 @@
             app:cardPreventCornerOverlap="true"
             app:cardBackgroundColor="@{context.getColor(movie.backgroundColor)}"
             tools:cardBackgroundColor="@color/color_movie3"
-            android:layout_margin="1dp">
+            android:layout_margin="1dp"
+            android:onClick="@{() -> listener.onMovieItemPressed(movie)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

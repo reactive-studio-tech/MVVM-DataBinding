@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        >
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -10,10 +9,110 @@
                 type="com.reactivestudio.viewmodelbinding.moviedetails.MovieDetailsViewModel"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".moviedetails.MovieDetailsFragment">
+            android:background="@color/colorPrimary"
+            android:scrollbars="none">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".moviedetails.MovieDetailsFragment">
+
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="280dp"
+                    android:background="@{viewmodel.movie.backgroundColor > 0 ? context.getColor(viewmodel.movie.backgroundColor) : 0}"
+                    tools:background="@color/color_movie1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:id="@+id/imageView"/>
+
+            <View
+                    android:id="@+id/movieDetailsShadowBackground"
+                    android:layout_width="0dp"
+                    android:layout_height="280dp"
+                    android:background="@drawable/shadow_gradient"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+
+            <TextView
+                    android:id="@+id/movieDetailsSubtitle"
+                    android:textSize="19sp"
+                    android:textStyle="normal"
+                    android:textColor="#CCF5F5F5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    tools:text="Movie subtitle"
+                    android:text="@{viewmodel.movie.subtitle}"
+                    app:layout_constraintBottom_toBottomOf="@+id/movieDetailsShadowBackground"/>
+
+            <TextView
+                    android:id="@+id/movieDetailsTitle"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#F5F5F5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
+                    tools:text="Movie title"
+                    android:text="@{viewmodel.movie.title}"
+                    app:layout_constraintBottom_toTopOf="@+id/movieDetailsSubtitle"/>
+
+            <TextView
+                    android:id="@+id/movieDetailsRating"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#F5F5F5"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:text="@{@string/rating(viewmodel.movie.rating)}"
+                    tools:text="Rating: 2.45"
+                    android:padding="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/movieDetailsShadowBackground"/>
+
+            <TextView
+                    android:id="@+id/movieDetailsDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:textColor="#D9F5F5F5"
+                    android:textSize="17sp"
+                    android:lineSpacingMultiplier="1.4"
+                    android:text="@string/ipsum"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/movieDetailsRating"
+                    tools:text="@string/ipsum"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    style="@style/Widget.MaterialComponents.FloatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:fabSize="auto"
+                    app:elevation="3dp"
+                    android:src="@drawable/ic_action_name"
+                    android:layout_margin="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/movieDetailsShadowBackground"
+                    app:layout_constraintBottom_toBottomOf="@+id/movieDetailsShadowBackground"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

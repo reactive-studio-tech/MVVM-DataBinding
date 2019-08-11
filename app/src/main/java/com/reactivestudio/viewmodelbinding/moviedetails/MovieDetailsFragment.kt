@@ -18,7 +18,18 @@ class MovieDetailsFragment: Fragment() {
         viewDataBinding = FragmentMovieDetailsBinding.bind(view).apply {
             viewmodel = obtainViewModel(MovieDetailsViewModel::class.java)
         }
-        viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
+
         return viewDataBinding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
+
+        arguments?.let {
+            val safeArgs = MovieDetailsFragmentArgs.fromBundle(it)
+            val id = safeArgs.movieId
+            viewDataBinding.viewmodel?.loadMovie(id)
+        }
     }
 }

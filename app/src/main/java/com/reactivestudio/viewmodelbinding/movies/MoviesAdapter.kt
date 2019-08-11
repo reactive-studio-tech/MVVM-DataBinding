@@ -14,10 +14,12 @@ class MoviesAdapter: RecyclerView.Adapter<MovieViewHolder>(), BindableAdapter<Li
      */
     private val dataSource = mutableListOf<Movie>()
 
+    private var listener: MovieItemClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ViewholderMovieItemBinding.inflate(inflater, parent, false)
-        return MovieViewHolder(binding)
+        return MovieViewHolder(binding, listener)
     }
 
     override fun getItemCount() = dataSource.size
@@ -30,6 +32,10 @@ class MoviesAdapter: RecyclerView.Adapter<MovieViewHolder>(), BindableAdapter<Li
         dataSource.clear()
         dataSource.addAll(data)
         notifyDataSetChanged()
+    }
+
+    fun setMovieClickListener(movieListener: MovieItemClickListener) {
+        listener = movieListener
     }
 
 }

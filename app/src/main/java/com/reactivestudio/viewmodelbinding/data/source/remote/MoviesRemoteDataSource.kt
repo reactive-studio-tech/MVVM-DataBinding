@@ -17,4 +17,23 @@ class MoviesRemoteDataSource internal constructor(private val ioDispatcher: Coro
             Result.Error(e)
         }
     }
+
+    override suspend fun getMovie(id: Int): Result<Movie> = withContext(ioDispatcher) {
+        return@withContext try {
+            val moviesResult = getMovies()
+            if (moviesResult is Result.Success) {
+                val movies = moviesResult.data
+
+                for (movie in movies) {
+                    if (movie.id == id) {
+                        Result.Success(movie)
+                    }
+                }
+            }
+
+            Result.Error(Exception("Movie not found"))
+        } catch(e: Exception) {
+            Result.Error(e)
+        }
+    }
 }

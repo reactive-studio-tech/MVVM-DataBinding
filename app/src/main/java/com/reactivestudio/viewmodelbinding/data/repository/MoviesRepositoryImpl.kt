@@ -17,4 +17,10 @@ class MoviesRepositoryImpl(private val moviesLocalDataSource: MoviesLocalDataSou
             moviesLocalDataSource.getMovies()
         }
     }
+
+    override suspend fun getMovie(id: Int): Result<Movie> {
+        return withContext(ioDispatcher) {
+            moviesLocalDataSource.getMovie(id)
+        }
+    }
 }
